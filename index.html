@@ -1,0 +1,40 @@
+<!-DOCTYPE HTML-->
+<html>
+<head>
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" type="text/css"/>
+<link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css" type="text/css"  />
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" type="text/css" />
+<script type="text/javascript" src="phonegap.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/jquery-2.2.0.min.js" ></script>
+<script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js" ></script>
+<script type="text/javascript">
+document.addEventListener("deviceready",function(){
+          $("#btnTomarFoto").tap(function (){
+            alert("ejecucion correcta ");
+            navigator.device.capture.captureImage(function (Foto){
+                ruta=Foto[0].fullPath;
+                //colocar la imagen en la pantalla colocando una etiqueta <img>
+                $("#imagen").append('<img src="'+ruta+'" width="100%"/>').attr('rel',ruta);
+                 },function(error){
+                     navigator.notification.alert("Error: "+error.code,null,"Captura de error");
+                     },{limit:1});
+             });
+    },false);
+    </script>
+</head>
+<body>
+<div data-role="page" id="principal">
+	<div data-role="header">
+		<h1>Manejo de camara</h1>
+	</div>
+         <div data-role="content">
+             <input type="button" id="btnTomarFoto" value="Capturar Foto"/>
+             <div id="imagen"></div>
+  	</div>
+	<div data-role="footer">
+		<p>pie de página</p>
+	</div>
+</div>
+</body>
+</html>
